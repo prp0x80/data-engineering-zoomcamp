@@ -1,0 +1,24 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+pandas = "==1.5.2"
+sqlalchemy = "*"
+pyarrow = "==10.0.1"
+psycopg2-binary = "*"
+prefect = "*"
+prefect-sqlalchemy = "==0.2.2"
+prefect-gcp = {version = "==0.2.3", extras = ["cloud_storage"]}
+protobuf = "==4.21.11"
+pandas-gbq = "==0.18.1"
+
+[dev-packages]
+black = "*"
+
+[requires]
+python_version = "3.10"
+
+[pipenv]
+allow_prereleases = true
