@@ -7,7 +7,7 @@ from prefect.tasks import task_input_hash
 from prefect_gcp.cloud_storage import GcsBucket
 
 
-@task(retries=3, cache_key_fn=task_input_hash, cache_expiration=timedelta(days=1))
+@task(retries=3, cache_key_fn=task_input_hash, refresh_cache=True)
 def fetch(dataset_url: str) -> pd.DataFrame:
     """
     Read data from web into pandas dataframe
@@ -61,7 +61,7 @@ def etl_web_to_gcs(year: int, month: int, color: str) -> None:
     df = fetch(dataset_url)
     df_clean = clean(df)
     path = write_local(df_clean, color, dataset_file)
-    write_gcs(path)
+    # write_gcs(path)
     print(path)
 
 
