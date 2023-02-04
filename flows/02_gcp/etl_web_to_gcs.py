@@ -20,8 +20,12 @@ def clean(df: pd.DataFrame) -> pd.DataFrame:
     """
     Fix dtypes issues
     """
-    df["tpep_pickup_datetime"] = pd.to_datetime(df["tpep_pickup_datetime"])
-    df["tpep_dropoff_datetime"] = pd.to_datetime(df["tpep_dropoff_datetime"])
+    try:
+        df["tpep_pickup_datetime"] = pd.to_datetime(df["tpep_pickup_datetime"])
+        df["tpep_dropoff_datetime"] = pd.to_datetime(df["tpep_dropoff_datetime"])
+    except:
+        df["lpep_pickup_datetime"] = pd.to_datetime(df["lpep_pickup_datetime"])
+        df["lpep_dropoff_datetime"] = pd.to_datetime(df["lpep_dropoff_datetime"])
     print(df.head(2))
     print(f"columns: {df.dtypes}")
     print(f"rows: {df.shape[0]}")
@@ -39,7 +43,7 @@ def write_local(df: pd.DataFrame, color: str, dataset_file: str) -> Path:
     return path
 
 
-@task()
+@task(retries=3)
 def write_gcs(path: Path) -> None:
     """
     Upload local parquet file to GCS
@@ -50,16 +54,12 @@ def write_gcs(path: Path) -> None:
 
 
 @flow()
-def etl_web_to_gcs() -> None:
+def etl_web_to_gcs(month: int = 11, year: int = 2020, color: str = "green") -> None:
     """
     The main ETL function
     """
-    color = "yellow"
-    year = 2021
-    month = 1
     dataset_file = f"{color}_tripdata_{year}-{month:02}"
     dataset_url = f"https://github.com/DataTalksClub/nyc-tlc-data/releases/download/{color}/{dataset_file}.csv.gz"
-
     df = fetch(dataset_url)
     df_clean = clean(df)
     path = write_local(df_clean, color, dataset_file)
@@ -68,4 +68,7 @@ def etl_web_to_gcs() -> None:
 
 
 if __name__ == "__main__":
-    etl_web_to_gcs()
+    color = "green"
+    year = 2020
+    month = 11
+    etl_web_to_gcs(month, year, color)
