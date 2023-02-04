@@ -6,7 +6,7 @@ from prefect.tasks import task_input_hash
 from prefect_gcp.cloud_storage import GcsBucket
 
 
-@task(retries=3, cache_key_fn=task_input_hash)
+@task(retries=3, cache_key_fn=task_input_hash, refresh_cache=True)
 def fetch(dataset_url: str) -> pd.DataFrame:
     """
     Read data from web into pandas dataframe
