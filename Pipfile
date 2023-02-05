@@ -13,6 +13,7 @@ prefect-sqlalchemy = "==0.2.2"
 prefect-gcp = {version = "==0.2.3", extras = ["cloud_storage"]}
 protobuf = "==4.21.11"
 pandas-gbq = "==0.18.1"
+pendulum = "==2.1.2"
 
 [dev-packages]
 black = "*"

@@ -1,14 +1,14 @@
 ###
 ### A complete description of a Prefect Deployment for flow 'etl-parent-flow'
 ###
-name: Parameterized ETL
+name: Homework Flow
 description: null
-version: acf3bd1ac7c760a3e7a356784d239d5f
+version: 2da1015c0c736e0c015ae887be60f7af
 # The work queue that will handle this deployment's runs
 work_queue_name: default
 work_pool_name: null
 tags: []
-parameters: {"color": "yellow", "months": [1, 2, 3], "year": 2021}
+parameters: {}
 schedule: null
 is_schedule_active: null
 infra_overrides: {}
@@ -30,7 +30,7 @@ flow_name: etl-parent-flow
 manifest_path: null
 storage: null
 path: /home/prashant/Projects/data-engineering-zoomcamp
-entrypoint: week2_practice/01_start/parameterized_flow.py:etl_parent_flow
+entrypoint: week2_homework1_solution/parameterized_flow.py:etl_parent_flow
 parameter_openapi_schema:
   title: Parameters
   type: object
@@ -56,4 +56,4 @@ parameter_openapi_schema:
       type: string
   required: null
   definitions: null
-timestamp: '2023-01-29T22:18:48.468871+00:00'
+timestamp: '2023-02-02T13:45:07.116355+00:00'

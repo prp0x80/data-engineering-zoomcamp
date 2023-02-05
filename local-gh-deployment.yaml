@@ -1,0 +1,67 @@
+###
+### A complete description of a Prefect Deployment for flow 'etl-web-to-gcs'
+###
+name: homework-gh-local
+description: The main ETL function
+version: 9cfd6d852ff37127c431e586fdfb5d30
+# The work queue that will handle this deployment's runs
+work_queue_name: default
+work_pool_name: null
+tags: []
+parameters: {}
+schedule: null
+is_schedule_active: true
+infra_overrides: {}
+
+###
+### DO NOT EDIT BELOW THIS LINE
+###
+flow_name: etl-web-to-gcs
+manifest_path: null
+infrastructure:
+  type: process
+  env: {}
+  labels: {}
+  name: null
+  command: null
+  stream_output: true
+  working_dir: null
+  _block_document_id: a83db04f-c372-426e-9592-8666aa6acaaa
+  _block_document_name: anonymous-9f0ef380-48de-49d0-9ead-b8acd1337566
+  _is_anonymous: true
+  block_type_slug: process
+  _block_type_slug: process
+storage:
+  repository: https://github.com/prp0x80/data-engineering-zoomcamp.git
+  reference: null
+  access_token: '**********'
+  include_git_objects: true
+  _block_document_id: c71d56e2-5eaf-42a8-8349-c80fe52f8b9b
+  _block_document_name: zoom-gh
+  _is_anonymous: false
+  block_type_slug: github
+  _block_type_slug: github
+path: ''
+entrypoint: flows/02_gcp/etl_web_to_gcs.py:etl_web_to_gcs
+parameter_openapi_schema:
+  title: Parameters
+  type: object
+  properties:
+    month:
+      title: month
+      default: 11
+      position: 0
+      type: integer
+    year:
+      title: year
+      default: 2020
+      position: 1
+      type: integer
+    color:
+      title: color
+      default: green
+      position: 2
+      type: string
+  required: null
+  definitions: null
+timestamp: '2023-02-04T21:04:51.735187+00:00'
